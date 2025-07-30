@@ -1,0 +1,64 @@
+# Get the full path to the script's folder
+$scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
+
+# Show script location as the default
+Write-Host "Default folder is the script's location: $scriptPath"
+
+# Prompt for folder path (user can press Enter to use default)
+$folderPathInput = Read-Host "Enter path to EXE/MSI files (Hit Enter to use the script's folder)"
+$folderPath = if ([string]::IsNullOrWhiteSpace($folderPathInput)) { $scriptPath } else { $folderPathInput }
+
+# Validate folder exists
+if (-not (Test-Path $folderPath)) {
+    Write-Error "Folder not found: $folderPath"
+    exit
+}
+
+# Get .exe and .msi files (non-recursive)
+$files = Get-ChildItem -Path $folderPath -File | Where-Object { $_.Extension -match '\.exe$|\.msi$' }
+
+if ($files.Count -eq 0) {
+    Write-Host "No files found in $folderPath with EXE or MSI extension."
+    exit
+}
+
+# Display file list with index
+Write-Host "`nAvailable files in $folderPath :`n"
+for ($i = 0; $i -lt $files.Count; $i++) {
+    Write-Host "$($i + 1). $($files[$i].Name)"
+}
+Write-Host "$($files.Count + 1). All files"
+
+# Prompt user for selection
+$selection = Read-Host "Type the number for the executable to extract the certificate from or select 'All files' for batch extraction."
+
+# Validate input
+if ($selection -match '^\d+$') {
+    $selection = [int]$selection
+} else {
+    Write-Error "Invalid input. Please enter a number."
+    exit
+}
+
+if ($selection -lt 1 -or $selection -gt ($files.Count + 1)) {
+    Write-Error "Selection out of range."
+    exit
+}
+
+# Determine files to process
+$targets = if ($selection -eq ($files.Count + 1)) { $files } else { @($files[$selection - 1]) }
+
+# Process each selected file
+foreach ($file in $targets) {
+    $authSignature = Get-AuthenticodeSignature -FilePath $file.FullName
+
+    if ($authSignature.Status -eq "Valid") {
+        $cert = $authSignature.SignerCertificate
+        $certPath = Join-Path -Path $file.DirectoryName -ChildPath ($file.BaseName + ".cer")
+
+        Export-Certificate -Cert $cert -FilePath $certPath -Force | Out-Null
+        Write-Host "Success! Certificate exported to: $certPath"
+    } else {
+        Write-Warning "Warning! '$($file.Name)' is not signed or has an invalid signature."
+    }
+}
