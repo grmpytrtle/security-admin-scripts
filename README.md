@@ -19,8 +19,8 @@ This PowerShell script helps you extract trusted publisher certificates from dig
 
 ## Usage
 
-1. Place the script in the same folder as the executables you wish to extract certificates from.
-2. Locate the script in PowerShell then run: .\ps-spc-extractor.ps1
-3. When prompted, hit Enter for script's folder otherwise choose other location.
-4. The script will list the available executables, chose one or all.
-5. Once selection is made, the script will issue certificates in CER format in the same directory as the source.
+1. Save the script to a convenient folder or place in the same location as the executables you wish to extract certificates from.
+2. Run powershell and run the script ps-spc-extractor.ps1
+3. When prompted, enter a folder location or hit Enter for script's default location.
+4. The script will list the available executables, chose one or select all.
+5. Certificates will be created in the source location under the same name.
