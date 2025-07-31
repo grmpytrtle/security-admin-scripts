@@ -8,11 +8,7 @@ More to be added shortly!
 
 ## List
 
-- Prompts for a folder (defaults to the script's location)
-- Lists all `.exe` and `.msi` files in the folder
-- Allows selection of individual files or all files at once
-- Extracts the signing certificate from validly signed files
-- Saves the certificate(s) in the same directory as the file(s), with a `.cer` extension
+- **ps-spc-extractor** - Extract Signing Publisher / Code Signing Certificates from Portable Executable (PE) Scripts.
 
 ---
 
