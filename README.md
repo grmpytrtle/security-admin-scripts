@@ -1,4 +1,4 @@
-# Extract Publisher Certificates from Signed Executables
+# Security Admin Scripts
 
 This PowerShell script helps you extract trusted publisher certificates from digitally signed `.exe` or `.msi` files. The exported `.cer` files can be used to configure:
 
