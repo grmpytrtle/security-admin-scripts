@@ -14,7 +14,7 @@ More to be added shortly!
 
 ## KQL Queries
 
-- **ps-spc-extractor** - Extract Signing Publisher / Code Signing Certificates from Portable Executable (PE) Scripts.
+- mde-avmode-query - Query all devices with Microsoft Defender in Active/Passive mode.
 
 ---
 
