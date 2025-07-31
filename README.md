@@ -6,12 +6,17 @@ More to be added shortly!
 
 ---
 
-## List
+## Certificates
 
 - **ps-spc-extractor** - Extract Signing Publisher / Code Signing Certificates from Portable Executable (PE) Scripts.
 
 ---
 
+## KQL Queries
+
+- **ps-spc-extractor** - Extract Signing Publisher / Code Signing Certificates from Portable Executable (PE) Scripts.
+
+---
 
 You're welcome to use them in any way you wish, but I ask you to be kind and mention me when sharing.
 
