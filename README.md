@@ -1,13 +1,12 @@
 # Security Admin Scripts
 
-This PowerShell script helps you extract trusted publisher certificates from digitally signed `.exe` or `.msi` files. The exported `.cer` files can be used to configure:
+This repository is a collection of scripts and other useful tools that bring quality of life to a systems security admin.
 
-- **AppLocker** rules using *Signed Publisher* conditions
-- **Microsoft Defender for Endpoint (MDE)** indicators for *SPC-based* (Signed Publisher Certificate) allow or block rules
+More to be added shortly!
 
 ---
 
-## Features
+## List
 
 - Prompts for a folder (defaults to the script's location)
 - Lists all `.exe` and `.msi` files in the folder
@@ -17,10 +16,7 @@ This PowerShell script helps you extract trusted publisher certificates from dig
 
 ---
 
-## Usage
 
-1. Save the script to a convenient folder or place in the same location as the executables you wish to extract certificates from.
-2. Run powershell and run the script ps-spc-extractor.ps1
-3. When prompted, enter a folder location or hit Enter for script's default location.
-4. The script will list the available executables, chose one or select all.
-5. Certificates will be created in the source location under the same name.
+You're welcome to use them in any way you wish, but I ask you to be kind and mention me when sharing.
+
+Thanks!
