@@ -56,3 +56,21 @@ DeviceProcessEvents
 | project ExampleFileName, Count
 ```
 ---
+
+## App Control Script Blocked
+
+Query App Control Scripts being blocked.
+
+```kusto
+DeviceEvents
+| where ActionType startswith "AppControlScriptBlocked"
+| extend ParsedFields = parsejson(AdditionalFields)
+| extend RuleGuid = tolower(tostring(ParsedFields.RuleId))
+| summarize 
+    DevicesImpacted = dcount(DeviceName) 
+    by InitiatingProcessFileName, InitiatingProcessFolderPath, RuleGuid, 
+       FileName, FolderPath, 
+       InitiatingProcessAccountName, InitiatingProcessAccountUpn
+| order by DevicesImpacted desc
+```
+---
