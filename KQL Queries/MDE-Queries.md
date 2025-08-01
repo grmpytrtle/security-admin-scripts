@@ -6,8 +6,9 @@ Useful MDE KQL queries
 
 ## MDE AV Active / Passive Mode
 
+The query shows all enrolled devices with Microsoft Defender in Active/Passive mode.
+
 ```kusto
-/// All devices with Microsoft Defender in Active/Passive mode
 let avmodetable = DeviceTvmSecureConfigurationAssessment
 | where ConfigurationId == "scid-2010" and isnotnull(Context)
 | extend avdata=parsejson(Context)
@@ -22,5 +23,21 @@ DeviceTvmSecureConfigurationAssessment
 | project DeviceId, DeviceName, OSPlatform, AVSigVersion, AVEngineVersion, AVSigLastUpdateTime, IsCompliant, IsApplicable
 | join avmodetable on DeviceId
 | project-away DeviceId1
+```
+---
+
+## Local Admin rights logon
+
+Users that logon with local admin rights.
+
+```kusto
+DeviceLogonEvents
+| where IsLocalAdmin == 1
+//| extend locallogon = extractjson(“$.IsLocalLogon”, AdditionalFields, typeof(string))
+| extend parsed = parse_json(AdditionalFields)
+| extend LocalLogon=tostring(parsed.IsLocalLogon) 
+| project Timestamp , DeviceName, AccountDomain, AccountName , LogonType, ActionType, LocalLogon
+// summarize by user
+| summarize LogonCount=count() by AccountName, DeviceName, AccountDomain
 ```
 ---
