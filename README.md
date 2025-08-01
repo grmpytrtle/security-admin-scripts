@@ -14,7 +14,10 @@ More to be added shortly!
 
 ## KQL Queries
 
-- mde-avmode-query - Query all devices with Microsoft Defender in Active/Passive mode.
+- MDE AV Active / Passive Mode
+- Local Admin rights logon
+- Top 50 most downloaded EXE / MSI
+- App Control Script Blocked
 
 ---
 
