@@ -6,9 +6,7 @@ Useful MDE KQL queries
 
 ## MDE AV Active / Passive Mode
 
-- **mde-avmode-query** - Query all devices with Microsoft Defender in Active/Passive mode.
-
-```
+```kusto
 /// All devices with Microsoft Defender in Active/Passive mode
 let avmodetable = DeviceTvmSecureConfigurationAssessment
 | where ConfigurationId == "scid-2010" and isnotnull(Context)
