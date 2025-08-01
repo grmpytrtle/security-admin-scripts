@@ -6,7 +6,9 @@ Useful MDE KQL queries
 
 ## MDE AV Active / Passive Mode
 
+
 The query shows all enrolled devices with Microsoft Defender in Active/Passive mode.
+
 
 ```kusto
 let avmodetable = DeviceTvmSecureConfigurationAssessment
@@ -28,7 +30,9 @@ DeviceTvmSecureConfigurationAssessment
 
 ## Local Admin rights logon
 
+
 Users that logon with local admin rights.
+
 
 ```kusto
 DeviceLogonEvents
@@ -44,7 +48,9 @@ DeviceLogonEvents
 
 ## Top 50 most downloaded EXE / MSI
 
+
 The 50 most downloaded executables by count, this is to audit genuine files for AppLocker or MDE Indicator exclusions.
+
 
 ```kusto
 DeviceProcessEvents
