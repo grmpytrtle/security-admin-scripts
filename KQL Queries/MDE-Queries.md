@@ -41,3 +41,18 @@ DeviceLogonEvents
 | summarize LogonCount=count() by AccountName, DeviceName, AccountDomain
 ```
 ---
+
+## Top 50 most downloaded EXE / MSI
+
+The 50 most downloaded executables by count, this is to audit genuine files for AppLocker or MDE Indicator exclusions.
+
+```kusto
+DeviceProcessEvents
+| where FolderPath has "AppData\\Local\\Downloads\\"
+| where FileName endswith ".exe" or FileName endswith ".msi"
+| extend FilePrefix = substring(FileName, 0, 8)
+| summarize Count = count(), ExampleFileName = any(FileName) by substring(FileName, 0, 8)
+| top 50 by Count desc
+| project ExampleFileName, Count
+```
+---
